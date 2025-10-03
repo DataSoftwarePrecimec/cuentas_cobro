@@ -148,38 +148,3 @@ function onCodeValidated() {
   document.querySelector("table").style.display = "none";
   get_rows_and_populate();
 }
-
-//DESCARGAR INFORME
-async function download_report() {
-  if (!confirm("¿Está seguro que desea descargar el informe?\n\nNOTA: El informe se actualiza cada 10 minutos. Si desea ver los cambios aquí realizado, se recomienda esperar.")) {
-    return; // user canceled
-  }
-  const submitBtn   = document.getElementById("submitBtn");
-  const downloadBtn = document.getElementById("downloadReportBtn");
-  submitBtn.disabled   = true;
-  downloadBtn.disabled = true;
-  try {
-    const code = document.getElementById("codigoInput").value.trim();
-    const res  = await fetch("/download_report", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code })});
-    const data = await res.json();
-    if (data && data.filedata) {
-      const byteChars = atob(data.filedata);
-      const byteNumbers = Array.from(byteChars, c => c.charCodeAt(0));
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: "application/pdf" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = data.filename;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    } else {
-      alert("El servidor no devolvió un PDF válido.");
-    }
-  } catch (err) {
-    console.error("Download error:", err);
-    alert("Error descargando el informe.");
-  } finally {
-    submitBtn.disabled   = false;
-    downloadBtn.disabled = false;
-  }
-}
