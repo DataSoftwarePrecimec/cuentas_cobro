@@ -1,3 +1,5 @@
+import { callGoogleScript } from "../shared/gas-utils.js";
+
 export async function onRequest(context) {
   const url = "https://script.google.com/macros/s/AKfycbxbsgfFR49j44PFsXi-BlxiD-0snFJaZU40kUOe0GcAmYKn7d8KcH3qQWVuG8g6jl7N/exec";
   const response = await fetch(url, {
