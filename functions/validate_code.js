@@ -1,3 +1,5 @@
+import { URL } from "./constants.js";
+
 export async function onRequest(context) {
   try {
     const body = await context.request.json();
