@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Aprobación de Servicios</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="img/small.png">
+  </head>
+  <body>
+    <header>
+      <img src="img/big.png" alt="Company Logo" style="height:auto; width:360px;"> 
+      <h1>APROBACIÓN DE SERVICIOS</h1>
+      <h3>454 DE 2025</h3>
+    </header>
+    <form id="entryForm" novalidate>
+      <div class="form-row">
+        <label for="correoInput">Correo Electrónico:</label>
+        <input type="email" id="correoInput" name="correo" required aria-describedby="correoHelp" />
+        <button type="button" id="sendEmailBtn" disabled>VALIDAR CORREO</button>
+      </div>
+      <div id="correoHelp" class="field-error" aria-live="polite"></div>
+      <div class="form-row">
+        <label for="codigoInput">Ingresar Código:</label>
+        <input type="text" id="codigoInput" name="codigo" maxlength="6" inputmode="numeric" pattern="\d{6}" aria-describedby="codigoHelp" disabled/>
+        <button type="button" id="validateCodeBtn" disabled>VALIDAR CÓDIGO</button>
+      </div>
+      <div id="codigoHelp" class="field-error" aria-live="polite"></div>
+    </form>
+    <div id="postValidationSection" style="display:none;">
+      <h2>Pacientes Pendientes de Aprobación</h2> 
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <button id="reloadBtn" disabled>
+          RECARGAR FILAS
+        </button>
+        <button id="submitBtn" type="button" onclick="submit_form()" disabled>
+          ENVIAR DATOS
+        </button>
+        <button id="downloadReportBtn" type="button" onclick="download_report()">
+          DESCARGAR INFORME
+        </button>
+      </div>
+      
+      <p id="formWarning" 
+         style="color: red; font-weight: bold; text-align:center; min-height:1.5em; margin-top:10px;">
+      </p>
+      
+      <div id="loading">
+        <div class="spinner"></div>
+        <p>Cargando pacientes pendientes...</p>
+      </div>
+      <table style="display:none;">
+        <thead>
+          <tr>
+            <th>ORDEN DE SERVICIO</th>
+            <th>ESTADO DE FACTURACIÓN</th>
+            <th>NOMBRES DEL PACIENTE</th>
+            <th>PROFORMA</th>
+            <th>GASTO QUIRÚRGICO</th>
+            <th>FACTURA</th>
+            <th>DESCRIPCIÓN QUIRÚRGICA</th>
+            <th>NOTA ACLARATORIA</th>
+            <th>ESPECIALIDAD</th>
+            <th>APROBACIÓN</th>
+            <th>GRUPO</th>
+            <th>ETIQUETA</th>
+            <th>DESCRIPCIÓN</th>
+          </tr>
+        </thead>
+        <tbody id="dataTable"></tbody>
+      </table>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/add_rows.js"></script>
+    <script src="js/validate_form.js"></script>
+    <script src="js/submit_form.js"></script>
+  </body>
+</html>
