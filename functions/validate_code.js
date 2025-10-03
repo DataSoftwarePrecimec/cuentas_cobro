@@ -20,8 +20,7 @@ export async function onRequest(context) {
       );
     }
     body.session_code = globalThis.session_code;
-    const url = "https://script.google.com/macros/s/AKfycbxbsgfFR49j44PFsXi-BlxiD-0snFJaZU40kUOe0GcAmYKn7d8KcH3qQWVuG8g6jl7N/exec";
-    const response = await fetch(url, {
+    const response = await fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
